@@ -3,7 +3,7 @@ const fastify = require("fastify")({
   logger: false,
 });
 
-require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: '.env.test.local' });
 
 fastify.register(require("fastify-cors"));
 
