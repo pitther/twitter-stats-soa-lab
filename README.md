@@ -1,4 +1,5 @@
-## twitter-stats-soa-lab
+## twitter-stats-soa-lab 
+react/chakra ui/fastify
 
 ## Dark theme
 ![Preview](/app_dark.png)
