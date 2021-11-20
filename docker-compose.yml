@@ -2,5 +2,9 @@ version: "3"
 services:
   backend:
     build: ./backend
+    ports:
+      - "3005:3005"
   frontend:
     build: ./frontend
+    ports:
+      - "3000:3000"

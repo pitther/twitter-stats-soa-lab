@@ -1,13 +1,13 @@
 const needle = require("needle");
 const fastify = require("fastify")({
-  logger: false,
+  logger: true,
 });
 
 require('dotenv').config({ path: '.env.test.local' });
 
 fastify.register(require("fastify-cors"));
 
-fastify.listen(process.env.SERVER_PORT, (err) => {
+fastify.listen(process.env.SERVER_PORT,'0.0.0.0', (err) => {
   if (err) throw err;
 });
 
