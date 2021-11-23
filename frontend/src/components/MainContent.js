@@ -21,38 +21,55 @@ const MainContent = () => {
       return;
     }
     setLoading(true);
-    const response = await fetch(
-      `http://localhost:3005/?userName=${userName}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    try {
+      const response = await fetch(
+          `/api/?userName=${userName}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+      );
+
+      const data = await response.json();
+      if (data.data) {
+        toast({
+          title: "Account found",
+          description: "Data is being processed.",
+          status: "success",
+          duration: 4000,
+          position: "bottom-left",
+          isClosable: true,
+        });
+        setData({ error: false, ...data.data[0] });
+      } else {
+        toast({
+          title: "Account is not found.",
+          description: "Doublecheck username you provided.",
+          status: "error",
+          duration: 4000,
+          position: "bottom-left",
+          isClosable: true,
+        });
+        setData({ error: true });
       }
-    );
-    const data = await response.json();
-    setLoading(false);
-    if (data.data) {
+      setLoading(false);
+
+    } catch (e) {
       toast({
-        title: "Account found",
-        description: "Data is being processed.",
-        status: "success",
+        title: "Cannot send request to server.",
+        description: e.toString(),
+        status: "error",
         duration: 4000,
         position: "bottom-left",
         isClosable: true,
       });
-      setData({ error: false, ...data.data[0] });
-      return;
+      setData({ error: true });
+      setLoading(false);
     }
-    toast({
-      title: "Account is not found.",
-      description: "Doublecheck username you provided.",
-      status: "error",
-      duration: 4000,
-      position: "bottom-left",
-      isClosable: true,
-    });
-    setData({ error: true });
+
+
   };
 
   return (

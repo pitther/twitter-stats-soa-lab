@@ -25,7 +25,6 @@ const InputForm = ({ analyze, setUserName, userName }) => {
             <Input
               onChange={onInputUserName}
               value={userName}
-              type="tel"
               placeholder="Input user name"
             />
           </InputGroup>
